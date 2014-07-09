@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140630225733) do
+ActiveRecord::Schema.define(version: 20140709120056) do
 
-  create_table "stories", force: true do |t|
+  create_table "gallery_items", force: true do |t|
     t.string   "email"
     t.string   "caption"
     t.integer  "upvotes"

@@ -13,7 +13,7 @@ class GalleryItemsController < ApplicationController
   end
 
   def create
-    safe_gallery_item_params = params.require(:gallery_item).permit(:email, :caption, :final_image)
+    safe_gallery_item_params = params.require(:gallery_item).permit(:email, :caption, :opt_in)
     @gallery_item = GalleryItem.new safe_gallery_item_params.merge(:upvotes => 1)
 
     if @gallery_item.save
