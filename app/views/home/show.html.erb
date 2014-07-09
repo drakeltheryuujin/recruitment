@@ -1,0 +1,6 @@
+<h1><%= @gallery_item.id %></h1>
+<h3><%= @gallery_item.user.try(:email) %></h3>
+<p>
+  <%= @gallery_item.final_image %>
+  <%= @gallery_item.caption %>
+</p>

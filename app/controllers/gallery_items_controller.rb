@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class GalleryItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def index

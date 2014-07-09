@@ -1,0 +1,28 @@
+<% if @gallery_item.errors.any? %>
+  <h2>The following errors prevented your image from saving:</h2>
+  <ul>
+  <% @story.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+<h1>Create a new image</h1>
+<%= form_for @gallery_item do |f| %>
+  <fieldset>
+    <legend>Story</legend>
+    <div>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </div>
+    <div>
+      <%= f.label :caption %>
+      <%= f.text_field :caption %>
+    </div>
+    <div>
+      <%= f.label :opt_in %>
+      <%= f.checkbox :opt_in %>
+    </div>
+  </fieldset>
+  <%= f.submit %>
+<% end %>
+
