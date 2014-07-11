@@ -12,10 +12,14 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'unicorn'
 gem 'devise'
+gem 'fog'
+gem 'aws-sdk'
+gem 'carrierwave'
 
 group :development do
   gem 'sqlite3',       group: :development
   gem 'spring',        group: :development
+  gem 'pry-rails'
 end
 
 group :production do
