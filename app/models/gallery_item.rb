@@ -1,11 +1,10 @@
 class GalleryItem < ActiveRecord::Base
-  validates :caption, :final_image, presence: true
+  validates :caption, presence: true
 
   scope :popular, -> { where('upvotes >= ?', 4)}
   scope :recent, -> { where('created_at >= ?', Date.today)}
 
   belongs_to :user
-  mount_uploader :avatar, ImageUploaderUploader
 
   def create_final_image
     img = ImageList.new('public/computer-cat.jpg')
@@ -18,9 +17,12 @@ class GalleryItem < ActiveRecord::Base
       txt.font_weight = Magick::BoldWeight
     }
     img.format = 'jpeg'
-    ::FOG_CONNECTION.put_object("recruitment-app", "generated-image-#{id}", img.to_blob, public: true)
-    file = FOG_CONNECTION.directories.get("recruitment-app").
-    final_image = file.public_url
+    self.save
+    ::FOG_CONNECTION.put_object("recruitment-app", "generated-image-#{id}", img.to_blob, public: "true")
+    directory = FOG_CONNECTION.directories.get("recruitment-app")
+    filename = "generated-image-#{id}"
+    file = directory.files.create(:key => filename, :body => img.to_blob, :public => true )
+    self.final_image = file.public_url
     self.save
   end
 

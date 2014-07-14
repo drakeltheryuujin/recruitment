@@ -2,7 +2,9 @@
 
 <div id="users">
   <ul>
-    <%= render current_user.gallery_items %>
+    <% current_user.gallery_items.each do |gal_item| %>
+      <%= render partial: 'gallery_items/gallery_item', locals: {gallery_item: gal_item} %>
+    <% end %>
   </ul>
 </div>
 
