@@ -10,10 +10,10 @@ class GalleryItem < ActiveRecord::Base
   belongs_to :user
 
   def create_final_image
-    img = ImageList.new('public/computer-cat.jpg')
+    img = ImageList.new('public/background1.jpg')
     txt = Draw.new
     img.annotate(txt, 0,0,0,0, "#{caption}"){
-      txt.gravity = Magick::NorthGravity
+      txt.gravity = Magick::CenterGravity
       txt.fill = '#ffffff'
       txt.pointsize = 36
       txt.font_family = 'Impact'
@@ -28,7 +28,6 @@ class GalleryItem < ActiveRecord::Base
     file = directory.files.create(:key => filename, :body => img.to_blob, :public => true )
     self.final_image = file.public_url
     self.save
-    binding.pry
   end
 
   def self.search_for(query)
