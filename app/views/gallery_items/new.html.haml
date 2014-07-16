@@ -1,0 +1,15 @@
+%h1
+  Create a new image
+
+= form_for @gallery_item do |f|
+  %fieldset
+    %legend
+      Make your image
+    %div
+      = f.label :caption
+      = f.text_field :caption
+    %div>
+      = f.label :opt_in
+      = f.check_box :opt_in
+  = f.submit
+

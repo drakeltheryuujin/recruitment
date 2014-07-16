@@ -1,3 +1,6 @@
+require 'RMagick'
+require 'rmagick_text_util.rb'
+
 class GalleryItem < ActiveRecord::Base
   validates :caption, presence: true
 
@@ -9,13 +12,14 @@ class GalleryItem < ActiveRecord::Base
   def create_final_image
     img = ImageList.new('public/computer-cat.jpg')
     txt = Draw.new
-    img.annotate(txt, 0,0,0,0, caption){
-      txt.gravity = Magick::SouthGravity
-      txt.pointsize = 25
-      txt.stroke = '#000000'
+    img.annotate(txt, 0,0,0,0, "#{caption}"){
+      txt.gravity = Magick::NorthGravity
       txt.fill = '#ffffff'
+      txt.pointsize = 36
+      txt.font_family = 'Impact'
       txt.font_weight = Magick::BoldWeight
     }
+    
     img.format = 'jpeg'
     self.save
     ::FOG_CONNECTION.put_object("recruitment-app", "generated-image-#{id}", img.to_blob, public: "true")
@@ -24,6 +28,7 @@ class GalleryItem < ActiveRecord::Base
     file = directory.files.create(:key => filename, :body => img.to_blob, :public => true )
     self.final_image = file.public_url
     self.save
+    binding.pry
   end
 
   def self.search_for(query)

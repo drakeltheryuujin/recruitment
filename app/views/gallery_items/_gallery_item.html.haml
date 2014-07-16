@@ -1,0 +1,16 @@
+%article.col-xs-12.col-sm-6.col-md-3
+  .panel.panel-default
+    .panel-body
+      %a.zoom{"data-footer" => "Submitted by #{gallery_item.email}", "data-title" =>  gallery_item.caption, "data-toggle" => "lightbox", "data-type" => "image", href: gallery_item.final_image, title: gallery_item.caption}
+        %img{src: gallery_item.final_image, title: "Submitted by #{gallery_item.email}"}
+        %span.overlay
+          %i.glyphicon.glyphicon-fullscreen
+    .panel-footer
+      %h4
+        %a{href: "#", title: "Submitted by #{gallery_item.email}"} 
+          Submitted by
+          = gallery_item.email
+      %span.pull-right
+        %i#like1.glyphicon.glyphicon-thumbs-up
+        #like1-bs3
+          = gallery_item.upvotes

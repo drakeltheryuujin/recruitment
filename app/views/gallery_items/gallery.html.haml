@@ -1,0 +1,12 @@
+%h1
+  Gallery
+
+= form_tag '/', method: :get do
+  = search_field_tag :q, params[:q
+  = submit_tag "Search"
+
+.container.mt40
+  %section.row
+    %article.col-xs-12.col-sm-6.col-md-3
+      = render partial: 'gallery_item', locals: {gallery_item: gal_item} %>
+

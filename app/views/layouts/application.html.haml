@@ -1,0 +1,42 @@
+!!!
+%html
+  %head
+    %title Recruit
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+  %body
+    .container.mt40
+.container
+  .row
+    .btn-group.btn-group-justified
+      - if current_page?(root_path) == false
+        .btn-group
+          %button.btn.btn-nav{type: "button"}
+            = link_to root_path do
+              %span.glyphicon.glyphicon-folder-close
+              %p
+                Home
+      - if user_signed_in?
+        .btn-group
+          %button.btn.btn-nav{type: "button"}
+            = link_to destroy_user_session_path, method: :delete do
+              %span.glyphicon.glyphicon-folder-close
+              %p
+                Sign Out
+      - else
+        .btn-group
+          %button.btn.btn-nav{type: "button"}
+            = link_to new_user_registration_path do
+              %span.glyphicon.glyphicon-folder-close
+              %p
+                Sign Up
+        .btn-group
+          %button.btn.btn-nav{type: "button"}
+            = link_to new_user_session_path do
+              %span.glyphicon.glyphicon-folder-close
+              %p
+                Sign In
+  %p.notice= notice
+  %p.alert= alert
+  = yield
